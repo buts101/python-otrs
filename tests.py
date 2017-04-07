@@ -23,8 +23,8 @@ SAMPLE_TICKET = """<Ticket>
             <CreateBy>1</CreateBy>
             <CreateTimeUnix>1400234702</CreateTimeUnix>
             <Created>2014-05-16 10:05:02</Created>
-            <CustomerID>9</CustomerID>
-            <CustomerUserID>foo@bar.tld</CustomerUserID>
+            <CustomerID>1001</CustomerID>
+            <CustomerUserID>user1</CustomerUserID>
             <EscalationResponseTime>0</EscalationResponseTime>
             <EscalationSolutionTime>0</EscalationSolutionTime>
             <EscalationTime>0</EscalationTime>
@@ -82,8 +82,8 @@ Cdlt.
           <CreateTimeUnix>1400234702</CreateTimeUnix>
           <Created>2014-05-16 10:05:02</Created>
           <CreatedBy>1</CreatedBy>
-          <CustomerID>9</CustomerID>
-          <CustomerUserID>john.doe@exemple.fr</CustomerUserID>
+          <CustomerID>1001</CustomerID>
+          <CustomerUserID>user1</CustomerUserID>
           <EscalationResponseTime>0</EscalationResponseTime>
           <EscalationSolutionTime>0</EscalationSolutionTime>
           <EscalationTime>0</EscalationTime>
@@ -132,9 +132,9 @@ Cdlt.
         <CreateTimeUnix>1400234702</CreateTimeUnix>
         <Created>2014-05-16 10:05:02
         </Created>
-        <CustomerID>9
+        <CustomerID>1001
         </CustomerID>
-        <CustomerUserID>john.doe@exemple.fr</CustomerUserID>
+        <CustomerUserID>user1</CustomerUserID>
         <EscalationResponseTime>0</EscalationResponseTime>
         <EscalationSolutionTime>0</EscalationSolutionTime>
         <EscalationTime>0</EscalationTime>
@@ -201,7 +201,7 @@ if not MISSING_VARS:
                        Priority='3 normal',
                        Queue='Postmaster',
                        Title='Problem test',
-                       CustomerUser='foo@exemple.fr',
+                       CustomerUser='user1',
                        Type='Unclassified')
             a = Article(Subject='UnitTest',
                         Body='bla',
@@ -218,7 +218,7 @@ if not MISSING_VARS:
                        Priority='3 normal',
                        Queue='Postmaster',
                        Title='Problem test',
-                       CustomerUser='foo@exemple.fr',
+                       CustomerUser='user1',
                        Type='Unclassified')
             a = Article(Subject='UnitTest',
                         Body='bla',
@@ -245,7 +245,7 @@ if not MISSING_VARS:
                        Priority='3 normal',
                        Queue='Postmaster',
                        Title='Problem test',
-                       CustomerUser='foo@exemple.fr',
+                       CustomerUser='user1',
                        Type='Unclassified')
             a = Article(Subject='UnitTest',
                         Body='bla',
@@ -272,7 +272,7 @@ if not MISSING_VARS:
                        Priority='3 normal',
                        Queue='Postmaster',
                        Title='Problem test',
-                       CustomerUser='foo@exemple.fr',
+                       CustomerUser='user1',
                        Type='Unclassified')
             a = Article(Subject='UnitTest',
                         Body='bla',
@@ -321,13 +321,13 @@ class TestObjects(unittest.TestCase):
         xml = etree.fromstring(SAMPLE_TICKET)
         t = Ticket.from_xml(xml)
         self.assertEqual(t.TicketID, 32)
-        self.assertEqual(t.CustomerUserID, 'foo@bar.tld')
+        self.assertEqual(t.CustomerUserID, 'user1')
 
     def test_ticket_from_xml_with_articles(self):
         xml = etree.fromstring(SAMPLE_TICKET_W_ARTICLES)
         t = Ticket.from_xml(xml)
         self.assertEqual(t.TicketID, 32)
-        self.assertEqual(t.CustomerUserID, 'john.doe@exemple.fr')
+        self.assertEqual(t.CustomerUserID, 'user1')
         articles = t.articles()
         self.assertIsInstance(articles, list)
         self.assertEqual(len(articles), 1)
